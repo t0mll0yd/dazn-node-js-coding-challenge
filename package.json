@@ -1,0 +1,11 @@
+{
+  "name": "dazn-node-js-coding-challenge",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": "git@github.com:t0mll0yd/dazn-node-js-coding-challenge.git",
+  "author": "Tom Lloyd <tom.w.lloyd@googlemail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
