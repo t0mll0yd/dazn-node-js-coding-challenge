@@ -22,6 +22,6 @@ The repository MUST contain:
 -	Any installation and deployment instructions for apps and components
 -	README file with URL for testing the service online and a brief explanation on the scalability strategy
 
-#### Rules 
+#### Rules
 If you do not complete the test please indicate how you would intend to finalize in the README. 
 You can use any library or tool you feel comfortable with but as few frameworks as possible. 
