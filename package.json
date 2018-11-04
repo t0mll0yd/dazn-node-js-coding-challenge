@@ -1,7 +1,7 @@
 {
   "name": "dazn-node-js-coding-challenge",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "build/src/server.js",
   "repository": "git@github.com:t0mll0yd/dazn-node-js-coding-challenge.git",
   "author": "Tom Lloyd <tom.w.lloyd@googlemail.com>",
   "license": "MIT",
@@ -11,7 +11,9 @@
   "devDependencies": {
     "@types/express": "^4.16.0",
     "@types/jest": "^23.3.9",
+    "@types/supertest": "^2.0.6",
     "jest": "^23.6.0",
+    "supertest": "^3.3.0",
     "ts-jest": "^23.10.4",
     "tslint": "^5.11.0",
     "typescript": "^3.1.3"
@@ -19,7 +21,9 @@
   "scripts": {
     "build": "tsc",
     "lint": "tslint src/**/*",
-    "start": "node build/app.js",
-    "test": "jest"
+    "start": "node build/src/server.js",
+    "test": "npm run test-unit && npm run test-component",
+    "test-unit": "jest --config jest-unit.config.js",
+    "test-component": "jest --config jest-component.config.js"
   }
 }
