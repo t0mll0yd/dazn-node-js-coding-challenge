@@ -19,8 +19,14 @@ jobs:
           name: Lint
           command: yarn lint
       - run:
-          name: Test
+          name: Unit Test
           command: yarn test-unit
+      - run:
+          name: Start App
+          command: nohup yarn start &
+      - run:
+          name: Component Test
+          command: yarn test-component
       - persist_to_workspace:
           root: /home/circleci
           paths:
