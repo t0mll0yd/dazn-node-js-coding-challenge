@@ -22,7 +22,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "lint": "tslint src/**/*",
+    "lint": "tslint **/*.ts",
     "start": "node build/src/server.js",
     "test": "npm run test-unit && npm run test-component",
     "test-unit": "jest --config jest-unit.config.js",
