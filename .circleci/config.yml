@@ -36,8 +36,17 @@ jobs:
           name: Install awscli
           command: sudo pip install awscli
       - run:
-          name: Deploy
-          command: echo 'deploying...'
+          name: Build Image
+          command: docker build -t dazn-coding-challenge .
+      - run:
+          name: Tag Image
+          command: dazn-coding-challenge:latest $DOCKER_REGISTRY/dazn-coding-challenge:latest
+      - run:
+          name: Push Image
+          command: $DOCKER_REGISTRY/dazn-coding-challenge:latest
+      - run:
+          name: Deploy App
+          command: aws ecs update-service --cluster dazn-cluster --service custom-service --force-new-deployment
 
 workflows:
   version: 2
