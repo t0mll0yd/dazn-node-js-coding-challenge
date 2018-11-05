@@ -41,10 +41,10 @@ jobs:
           command: docker build -t dazn-coding-challenge .
       - run:
           name: Tag Image
-          command: docker dazn-coding-challenge:latest $DOCKER_REGISTRY/dazn-coding-challenge:latest
+          command: docker tag dazn-coding-challenge:latest $DOCKER_REGISTRY/dazn-coding-challenge:latest
       - run:
           name: Push Image
-          command: docker $DOCKER_REGISTRY/dazn-coding-challenge:latest
+          command: docker push $DOCKER_REGISTRY/dazn-coding-challenge:latest
       - run:
           name: Deploy App
           command: aws ecs update-service --cluster dazn-cluster --service custom-service --force-new-deployment
