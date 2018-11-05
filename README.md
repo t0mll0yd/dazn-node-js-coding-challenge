@@ -97,3 +97,4 @@ Given more time, here are some other things that could have been done:
 - The basic auth should be replaced with a more sophisticated authentication mechanism, such as OAuth2.
 - The console logs should be replaced with a logger that can produce ELK logs (or similar). This would allow querying, as well as the possibility of setting up alerts.
 - The in-memory store for user streams should be replaced by a proper database backend. Currently, if you restart the server, everything is lost. Woops!
+- A better place for the API documentation would be nice... perhaps in Swagger.
