@@ -8,7 +8,7 @@ describe("Server", () => {
             .get('/')
             .expect(200)
             .then(response => {
-                expect(response.text).toBe("Hello from circle ci");
+                expect(response.text).toBe("Hello from CIRCLE CI");
             });
     });
 });
