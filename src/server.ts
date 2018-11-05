@@ -6,6 +6,9 @@ const port = 3000;
 
 const store = new InMemoryStore();
 
+// A health check endpoint is required for AWS
+app.get("/health-check", (req, res) => { res.send() });
+
 app.post("/users/:userId/streams/:streamId", (req, res) => {
     const { userId, streamId } = req.params;
     const streams = store.getStreams(userId);

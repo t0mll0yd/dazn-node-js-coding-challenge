@@ -15,6 +15,12 @@ describe("Server", () => {
             .expect(404)
     });
 
+    test("GET '/health-check' returns 200 OK", async () => {
+        await request
+            .get('/health-check')
+            .expect(200)
+    });
+
     test("GET '/users/USER_ID/streams/STREAM_ID' returns 404 NOT FOUND", async () => {
         await request
             .get(`/users/${randomID()}/streams/1`)
