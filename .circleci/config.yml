@@ -22,6 +22,9 @@ jobs:
           name: Unit Test
           command: yarn test-unit
       - run:
+          name: Build App
+          command: yarn build
+      - run:
           name: Start App
           command: yarn start
           background: true
