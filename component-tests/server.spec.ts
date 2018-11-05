@@ -4,18 +4,30 @@ const request = supertest(process.env.API_LOCATION || 'http://localhost:3000');
 
 const randomID = () => Math.random().toString(36).substring(2);
 
+const username = process.env.API_USERNAME || 'username';
+const password = process.env.API_PASSWORD || 'password';
+
 const addStream = (userId: string, streamId: string): supertest.Test => {
-    return request.post(`/users/${userId}/streams/${streamId}`)
+    return request
+        .post(`/users/${userId}/streams/${streamId}`)
+        .auth(username, password)
 };
 
 describe("Server", () => {
+    test("GET '/' without basic auth returns 401 UNAUTHORIZED", async () => {
+        await request
+            .get('/')
+            .expect(401)
+    });
+
     test("GET '/' returns 404 NOT FOUND", async () => {
         await request
             .get('/')
+            .auth(username, password)
             .expect(404)
     });
 
-    test("GET '/health-check' returns 200 OK", async () => {
+    test("GET '/health-check' returns 200 OK without the need for basic auth", async () => {
         await request
             .get('/health-check')
             .expect(200)
@@ -24,12 +36,14 @@ describe("Server", () => {
     test("GET '/users/USER_ID/streams/STREAM_ID' returns 404 NOT FOUND", async () => {
         await request
             .get(`/users/${randomID()}/streams/1`)
+            .auth(username, password)
             .expect(404)
     });
 
     test("POST '/users/USER_ID/streams/STREAM_ID' returns 201 CREATED", async () => {
         await request
             .post(`/users/${randomID()}/streams/1`)
+            .auth(username, password)
             .expect(201)
     });
 

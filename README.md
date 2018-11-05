@@ -19,7 +19,7 @@ Otherwise, it will return a `409 CONFLICT` with a message body:
 ```
 {
     "error": {
-        "code": "streams.limit.reached,
+        "code": "streams.limit.reached",
         "message": "This user already has the maximum number of concurrent streams."
     }
 }

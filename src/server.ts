@@ -1,38 +1,14 @@
 import express = require("express");
-import {InMemoryStore} from "./stores/InMemoryStore";
+
+import AuthenticationMiddleware from "./middleware/Authentication";
+import StreamsController from "./controllers/Streams";
+
+const port = process.env.PORT || 3000;
 
 const app = express();
-const port = 3000;
 
-const store = new InMemoryStore();
-
-// A health check endpoint is required for AWS
 app.get("/health-check", (req, res) => { res.send() });
-
-app.post("/users/:userId/streams/:streamId", (req, res) => {
-    const { userId, streamId } = req.params;
-    const streams = store.getStreams(userId);
-
-    console.log(`Received stream '${streamId}' for user '${userId}'. Current streams: [${Array.from(streams).join(", ")}].`);
-
-    if (streams.has(streamId)) {
-        console.log("Stream already exists.");
-
-        res.statusCode = 200;
-        res.send()
-    } else if (streams.size > 2) {
-        console.log("Maximum concurrent stream limit reached.");
-
-        res.statusCode = 409;
-        res.send()
-    } else {
-        console.log("Adding new stream.");
-
-        store.addStream(userId, streamId);
-
-        res.statusCode = 201;
-        res.send();
-    }
-});
+app.use(AuthenticationMiddleware);
+app.post("/users/:userId/streams/:streamId", StreamsController);
 
 app.listen(port, () => console.log(`Listening on port ${port}...`));
