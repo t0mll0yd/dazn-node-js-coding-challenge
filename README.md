@@ -19,13 +19,13 @@ Otherwise, it will return a `409 CONFLICT` with a message body:
 ```
 {
     "error": {
-        "code": "streams.limit.reached,
+        "code": "streams.limit.reached",
         "message": "This user already has the maximum number of concurrent streams."
     }
 }
 ```
 
-NB: The endpoint requires basic auth to access and uses the following credentials: `dazn:pass1234` (super secure!). Without this the
+NB: The endpoint requires basic auth to access and uses the following credentials: `username:password ` (super secure!). Without this the
 endpoint will respond with a `401 UNAUTHORIZED`.
 
 ### Pipeline And Hosting

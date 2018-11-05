@@ -6,13 +6,15 @@
   "author": "Tom Lloyd <tom.w.lloyd@googlemail.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "express-basic-auth": "^1.1.6"
   },
   "devDependencies": {
     "@types/express": "^4.16.0",
     "@types/jest": "^23.3.9",
     "@types/supertest": "^2.0.6",
     "jest": "^23.6.0",
+    "node-mocks-http": "^1.7.3",
     "supertest": "^3.3.0",
     "ts-jest": "^23.10.4",
     "tslint": "^5.11.0",
@@ -20,7 +22,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "lint": "tslint src/**/*",
+    "lint": "tslint **/*.ts",
     "start": "node build/src/server.js",
     "test": "npm run test-unit && npm run test-component",
     "test-unit": "jest --config jest-unit.config.js",

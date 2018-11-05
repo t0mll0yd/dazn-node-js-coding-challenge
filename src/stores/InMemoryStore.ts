@@ -1,4 +1,4 @@
-import { IStore } from "./Store";
+import IStore from "./IStore";
 
 export class InMemoryStore implements IStore {
     private store: { [userId: string]: Set<string> } = {};
