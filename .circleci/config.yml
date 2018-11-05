@@ -23,7 +23,8 @@ jobs:
           command: yarn test-unit
       - run:
           name: Start App
-          command: nohup yarn start &
+          command: yarn start
+          background: true
       - run:
           name: Component Test
           command: yarn test-component
