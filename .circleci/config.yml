@@ -30,15 +30,15 @@ jobs:
     docker:
       - image:
           - circleci/python:2.7
-      steps:
-        - attach_workspace:
-            at: /home/circleci
-        - run:
-            name: Install awscli
-            command: sudo pip install awscli
-        - run:
-            name: Deploy
-            command: echo 'deploying...'
+    steps:
+      - attach_workspace:
+          at: /home/circleci
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Deploy
+          command: echo 'deploying...'
 
 workflows:
   version: 2
