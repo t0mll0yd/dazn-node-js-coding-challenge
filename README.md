@@ -25,7 +25,7 @@ Otherwise, it will return a `409 CONFLICT` with a message body:
 }
 ```
 
-NB: The endpoint requires basic auth to access and uses the following credentials: `dazn:pass1234` (super secure!). Without this the
+NB: The endpoint requires basic auth to access and uses the following credentials: `username:password ` (super secure!). Without this the
 endpoint will respond with a `401 UNAUTHORIZED`.
 
 ### Pipeline And Hosting
