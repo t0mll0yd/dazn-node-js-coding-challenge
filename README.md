@@ -5,7 +5,7 @@ It is an Express based service written in Typescript.
 
 ### API
 
-For a given user, with a USER_ID, you can add a video stream, with a STREAM_ID. You can add a maximum of 3.
+For a given user, with a USER_ID, you can add a video stream, with a STREAM_ID. You can add a maximum of 3 streams.
 An assumption here is that stream IDs are unique for all combinations of content and devices on which the content is being watched. 
 This allows the POST request to be idempotent.
 
@@ -28,16 +28,16 @@ Otherwise, it will return a `409 CONFLICT` with a message body:
 NB: The endpoint requires basic auth to access and uses the following credentials: `username:password ` (super secure!). Without this the
 endpoint will respond with a `401 UNAUTHORIZED`.
 
-### Pipeline And Hosting
+### Pipeline And Deployment
 
 There is a simple build pipeline set up for this project on Circle CI. This runs all tests and linting,
-and publishes the latest code as an image to ECR (Amazon's Elastic Container Registry). This is then hosted
-on ECS (Amazon's Elastic Container Service) which is available at the following URL:
+and publishes the latest code from master as a Docker image to ECR (Amazon's Elastic Container Registry). This is then deployed
+to ECS (Amazon's Elastic Container Service) which is available at the following URL:
 
 http://ec2co-ecsel-1bd8m940aolpz-1729440468.us-east-2.elb.amazonaws.com:3000
 
 Containerising the application and hosting on ECS allows for easy scalability (both manual and automatic)
-which can be added through the ECS dashboard.
+which can be implemented through the ECS dashboard.
 
 ### Running the app
 
@@ -89,3 +89,11 @@ Or alternatively run both unit and component tests with:
 ```
 yarn test
 ```
+
+### Further Improvements
+
+Given more time, here are some other things that could have been done:
+
+- The basic auth should be replaced with a more sophisticated authentication mechanism, such as OAuth2.
+- The console logs should be replaced with a logger that can produce ELK logs (or similar). This would allow querying, as well as the possibility of setting up alerts.
+- The in-memory store for user streams should be replaced by a proper database backend. Currently, if you restart the server, everything is lost. Woops!

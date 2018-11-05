@@ -15,21 +15,21 @@ export default (req: Request, res: Response) => {
         console.log("Stream already exists.");
 
         res.statusCode = 200;
-        res.send();
+        res.json();
     } else if (streams.size > 2) {
         console.log("Maximum concurrent stream limit reached.");
 
         res.statusCode = 409;
-        res.send(JSON.stringify(errorResponse(
+        res.json(errorResponse(
             "streams.limit.reached",
             "This user already has the maximum number of concurrent streams."
-        )));
+        ));
     } else {
         console.log("Adding new stream.");
 
         store.addStream(userId, streamId);
 
         res.statusCode = 201;
-        res.send();
+        res.json();
     }
 };
