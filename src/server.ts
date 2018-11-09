@@ -1,7 +1,7 @@
 import express = require("express");
 
-import StreamsController from "./controllers/Streams";
 import HealthCheckController from "./controllers/HealthCheck";
+import StreamsController from "./controllers/Streams";
 import AuthenticationMiddleware from "./middleware/Authentication";
 
 const port = process.env.PORT || 3000;
