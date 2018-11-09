@@ -5,9 +5,9 @@ import {InMemoryStore} from "../stores/InMemoryStore";
 // This should be replaced with a database implementation.
 const store = new InMemoryStore();
 
-export default (req: Request, res: Response) => {
+export default async (req: Request, res: Response) => {
     const { userId, streamId } = req.params;
-    const streams = store.getStreams(userId);
+    const streams = await store.getStreams(userId);
 
     console.log(`Received stream "${streamId}" for user "${userId}". Current streams: [${Array.from(streams).join(", ")}].`);
 
@@ -27,7 +27,7 @@ export default (req: Request, res: Response) => {
     } else {
         console.log("Adding new stream.");
 
-        store.addStream(userId, streamId);
+        await store.addStream(userId, streamId);
 
         res.statusCode = 201;
         res.json();

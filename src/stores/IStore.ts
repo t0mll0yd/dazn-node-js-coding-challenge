@@ -1,5 +1,5 @@
 export default interface IStore {
-    getStreams(userId: string): Set<string>;
+    getStreams(userId: string): Promise<Set<string>>;
 
-    addStream(userId: string, streamId: string): void;
+    addStream(userId: string, streamId: string): Promise<void>;
 }
