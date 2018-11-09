@@ -30,7 +30,7 @@ describe("Server", () => {
     test("GET '/health-check' returns 200 OK without the need for basic auth", async () => {
         await request
             .get("/health-check")
-            .expect(200);
+            .expect(200, { message: "Hello from the Typescript/Node JS/Express based DAZN coding challenge service!"})
     });
 
     test("GET '/users/USER_ID/streams/STREAM_ID' returns 404 NOT FOUND", async () => {
@@ -57,9 +57,16 @@ describe("Server", () => {
     test("Fourth added STREAM_ID for a user returns 409 Conflict", async () => {
         const userId = randomID();
 
+        const maxStreamsErrorResponse = {
+            "error": {
+                "code": "streams.limit.reached",
+                "message": "This user already has the maximum number of concurrent streams."
+            }
+        };
+
         await addStream(userId, "1").expect(201);
         await addStream(userId, "2").expect(201);
         await addStream(userId, "3").expect(201);
-        await addStream(userId, "4").expect(409);
+        await addStream(userId, "4").expect(409, maxStreamsErrorResponse);
     });
 });

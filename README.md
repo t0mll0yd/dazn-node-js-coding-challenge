@@ -1,7 +1,7 @@
 # Dazn Node.js Coding Challenge
 
 This repository contains my submission for the Dazn Node.js coding challenge.
-It is an Express based service written in Typescript.
+It is an Express based service written in Typescript. You can find my codebase for the agnostic solution (for me that is Scala/Finagle) [here][0].
 
 ### API
 
@@ -13,8 +13,9 @@ This allows the POST request to be idempotent.
 POST /users/USER_ID/streams/STREAM_ID
 ```
 
-If the user has 2 or less current streams, this will return a `201 CREATED` response.
-Otherwise, it will return a `409 CONFLICT` with a message body:
+If the user is already registered to this stream, it will return a `200 OK` response. 
+Otherwise, if the user has 2 or less current streams, this will add the new stream and return a `201 CREATED` response.
+Otherwise, when the user is already registered with the maximum number of streams, it will return a `409 CONFLICT` response with a message body:
 
 ```
 {
@@ -27,6 +28,14 @@ Otherwise, it will return a `409 CONFLICT` with a message body:
 
 NB: The endpoint requires basic auth to access and uses the following credentials: `username:password ` (super secure!). Without this the
 endpoint will respond with a `401 UNAUTHORIZED`.
+
+There is also a health check endpoint, which is used by ECS (see next section) to check
+that the service has been correctly deployed and started. It also returns a message which distinguishes this version
+and the Scala version of the service. This endpoint does *not* require basic auth and can be called with:
+
+```
+GET /health-check
+```
 
 ### Pipeline And Deployment
 
@@ -92,8 +101,10 @@ yarn test
 
 ### Further Improvements
 
-Given more time, here are some other things that could have been done:
+Given more time, here are some other things I would have done:
 
 - The basic auth should be replaced with a more sophisticated authentication mechanism, such as OAuth2.
 - The console logs should be replaced with a logger that can produce ELK logs (or similar). This would allow querying, as well as the possibility of setting up alerts.
 - The in-memory store for user streams should be replaced by a proper database backend. Currently, if you restart the server, everything is lost. Woops!
+
+[0]: https://github.com/t0mll0yd/dazn-agnostic-coding-challenge
